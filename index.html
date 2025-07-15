@@ -11,7 +11,7 @@
       max-width: 600px;
       margin: auto;
       padding: 20px;
-      background-color: #f9f9f9;
+      background: radial-gradient(circle, rgb(124, 124, 124) 5%, #383838 95%);
       text-align: center;
     }
 
@@ -23,6 +23,14 @@
       border-radius: 12px;
       margin-right: 10px;
       box-sizing: border-box;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     button {
@@ -33,11 +41,20 @@
       cursor: pointer;
       transition: background-color 0.3s;
       user-select: none;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #addBtn {
       background-color: #1976d2;
       color: white;
+      margin-top: 20px;
     }
     #addBtn:hover {
       background-color: #115293;
@@ -46,7 +63,7 @@
     #startBtn {
       background-color: #388e3c;
       color: white;
-      margin-top: 25px;
+      margin-top: 50px;
       width: 90%;
       max-width: 250px;
       font-weight: bold;
@@ -76,6 +93,14 @@
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     .delBtn {
@@ -159,6 +184,15 @@
 
     h1 {
       margin-bottom: 10px;
+      color: #949494;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
   </style>
 </head>

@@ -1,4 +1,3 @@
-E html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -10,13 +9,22 @@ E html>
       max-width: 600px;
       margin: auto;
       padding: 20px;
-      background-color: #f9f9f9;
+      background: radial-gradient(circle, rgb(124, 124, 124) 5%, #383838 95%);
       text-align: center;
     }
 
     #spielerName {
       font-size: 1.5rem;
       margin-bottom: 10px;
+      color: #dbdbdb;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #spielerAuswahl {
@@ -30,6 +38,14 @@ E html>
       width: 100%;
       max-width: 300px;
       box-sizing: border-box;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #kategorieAuswahl {
@@ -43,12 +59,29 @@ E html>
       width: 100%;
       max-width: 300px;
       box-sizing: border-box;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #kategorieName {
       font-weight: bold;
       margin-bottom: 20px;
       font-size: 1.2rem;
+      color: #dbdbdb;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #textContainer {
@@ -65,6 +98,15 @@ E html>
       box-sizing: border-box;
       transition: box-shadow 0.4s, color 0.4s;
       user-select: none;
+      color: #000000;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     /* Spezialer Joker Text Stil */
@@ -84,6 +126,14 @@ E html>
       margin: 0 15px;
       min-width: 140px;
       transition: background-color 0.3s, color 0.3s;
+      border: 5px solid rgb(40, 40, 40);     /* dicker schwarzer Rand innen */
+      border-radius: 6px;
+      box-sizing: border-box;
+      padding: 6px 10px;
+
+      /* weißer Rand außen */
+      outline: 2px solid white;    /* dünner weißer Rand außen */
+      outline-offset: 2px;         /* Abstand zwischen Border und Outline */
     }
 
     #neuBtn {
@@ -117,6 +167,7 @@ E html>
       color: white;
       padding: 10px 20px;
       border-radius: 10px;
+
     }
     #zurueckBtn:hover {
       background-color: #444444;
@@ -151,17 +202,17 @@ E html>
   <script>
     const texte = {
       draussen: [
-        "Gehe zu einer Person und tue so als hättest du eine Frage sage anschliessen ähm 5 mal und sag ihr du höttest die Frage vergessen.",
-        "Frage eine Person wo sich der Laden oder das Gebäude befinden obwohl es vor dir oder in deiner umgebung ist.",
-        "Gehe zu einer Person und zeige.",
-        "Fange an vor einer Zufälligen Persom zu Tanzen.",
-        "Frage eine Person ob si english kann (auf englisch) spreche dann auf deutsch über das Wetter.",
+        "Geh zu einer Person und tu so, als hättest du eine Frage. Sag dann fünfmal ähm und sag ihr anschließend, dass du die Frage vergessen hast.",
+        "Frag eine Person, wo sich der Laden oder das Gebäude befindet, obwohl es direkt vor dir oder in deiner Nähe ist.",
+        "Geh zu einer Person, zeig auf ein Gebäude, sei stolz darauf, wie reich du bist, und behaupte, dass du dieses Gebäude errichtet hast.",
+        "Fang an, vor einer zufälligen Person zu tanzen.",
+        "Frag eine Person auf Englisch, ob sie Englisch spricht, und sprich dann auf Deutsch über das Wetter.",
         "Verwirre eine Person beim Reden.",
-        "Gib einer zufälligen Person ein kompliment.",
-        "Setzte dich neben einer Person bleibe dort für 5 sekunden und gehe dann wieder",
+        "Gib einer zufälligen Person ein Kompliment.",
+        "Setze oder Stelle dich neben eine Person, bleib dort fünf Sekunden lang und geh dann wieder weg.",
         "Mach Griddy über ein Zebrastreifen.",
-        "Frage eine Person ob sie Singel ist wenn sie Ja sagt antworte dann mit kein wunder sollte sie mit nein antworten sage dann ok cool bist du",
-        "Frage eine Person nach einem Selfie zusammen.",
+        "Frag eine Person, ob sie Single ist. Wenn sie Ja sagt, antworte mit Kein Wunder. Wenn sie Nein sagt, sag: Okay, cool bist du.",
+        "Frag eine Person, ob ihr ein Selfie zusammen machen könnt.",
         "Frage eine Person nach deinem eigenen Handy Code",
         "Erzähle einen Witz, der kein Sinn macht Lache dann, sollte die Person auch lachen frage sie dann nach einer erklärung des Witzes.",
       ],
@@ -206,6 +257,7 @@ E html>
         "Frage ein Person ob sie diese Persohn sah (auf dem Handy ist ein Italian Brainrot charakter)",
         "Du musst nichts machen Glück gehabt",
         "Gehe zu einer Person begrüsse sie 5 mal gehe dann weg.",
+        "Geh zu einer Person und mach vor ihr fünf Liegestütze.",
       ],
       oev: [
         "Joker: Du darfst eine ÖV-Runde aussetzen!",
@@ -225,15 +277,15 @@ E html>
         "Spiele Spielchen mit der Kassiererin ziehe dein Produkt immer weiter gegen hinten des Bandes.",
         "Beschwere dich Laut über die Preise.",
         "Lege dich vor einer Person auf dem Boden.",
-        "verneine jede aussage der Kassierein",
+        "Verneine jede aussage der Kassierein",
         "Kaufe nur ein Plastiksack im wert von 5 Rappen",
         "Du musst nichts machen Glück gehabt",
       ]
     };
 
-    let kategorie = 'draussen'; // Startkategorie
+    const kategorie = localStorage.getItem('jokerKategorie') || 'draussen';
     let aktuellerTextIndex = 0;
-
+    console.log('Gewählte Kategorie:', kategorie);
     let teilnehmer = JSON.parse(localStorage.getItem('jokerTeilnehmer')) || [];
 
     teilnehmer = teilnehmer.map(spieler => {

@@ -1,0 +1,367 @@
+E html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1-10 - Spiel</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    #spielerName {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    #spielerAuswahl {
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #444;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+    }
+
+    #kategorieAuswahl {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #444;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
+      max-width: 300px;
+      box-sizing: border-box;
+    }
+
+    #kategorieName {
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    #textContainer {
+      background-color: white;
+      border-radius: 16px;
+      padding: 30px 20px;
+      margin-bottom: 30px;
+      font-size: 1.3rem;
+      color: #333;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      transition: box-shadow 0.4s, color 0.4s;
+      user-select: none;
+    }
+
+    /* Spezialer Joker Text Stil */
+    #textContainer.jokerText {
+      color: #b8860b; /* goldgelb */
+      box-shadow: 0 0 15px 4px rgba(184,134,11,0.7);
+      font-weight: bold;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 15px;
+      min-width: 140px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #neuBtn {
+      background-color: #1e88e5; /* blau */
+      color: white;
+    }
+    #neuBtn:hover {
+      background-color: #1565c0;
+    }
+
+    #jokerBtn {
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+    }
+    #jokerBtn:hover:not(:disabled) {
+      background-color: #daa520;
+    }
+
+    #jokerBtn:disabled {
+      background-color: #999999;
+      color: #666666;
+      text-decoration: line-through;
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #zurueckBtn {
+      margin-top: 40px;
+      background-color: #666666;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    #zurueckBtn:hover {
+      background-color: #444444;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="spielerName"></div>
+
+  <!-- Dropdown zum Spieler wechseln -->
+  <select id="spielerAuswahl" title="Aktiven Spieler auswählen"></select>
+
+  <!-- Dropdown für Kategorie -->
+  <select id="kategorieAuswahl" title="Kategorie auswählen">
+    <option value="draussen">Draussen</option>
+    <option value="oev">ÖV</option>
+    <option value="laeden">Läden</option>
+  </select>
+
+  <div id="kategorieName"></div>
+
+  <div id="textContainer">Hier erscheint die Aufgabe</div>
+
+  <div>
+    <button id="neuBtn">Neue Aufgabe</button>
+    <button id="jokerBtn">Joker</button>
+  </div>
+
+  <button id="zurueckBtn">Zurück zur Startseite</button>
+
+  <script>
+    const texte = {
+      draussen: [
+        "Gehe zu einer Person und tue so als hättest du eine Frage sage anschliessen ähm 5 mal und sag ihr du höttest die Frage vergessen.",
+        "Frage eine Person wo sich der Laden oder das Gebäude befinden obwohl es vor dir oder in deiner umgebung ist.",
+        "Gehe zu einer Person und zeige.",
+        "Fange an vor einer Zufälligen Persom zu Tanzen.",
+        "Frage eine Person ob si english kann (auf englisch) spreche dann auf deutsch über das Wetter.",
+        "Verwirre eine Person beim Reden.",
+        "Gib einer zufälligen Person ein kompliment.",
+        "Setzte dich neben einer Person bleibe dort für 5 sekunden und gehe dann wieder",
+        "Mach Griddy über ein Zebrastreifen.",
+        "Frage eine Person ob sie Singel ist wenn sie Ja sagt antworte dann mit kein wunder sollte sie mit nein antworten sage dann ok cool bist du",
+        "Frage eine Person nach einem Selfie zusammen.",
+        "Frage eine Person nach deinem eigenen Handy Code",
+        "Erzähle einen Witz, der kein Sinn macht Lache dann, sollte die Person auch lachen frage sie dann nach einer erklärung des Witzes.",
+      ],
+      oev: [
+        "Frage jemanden nach der nächsten Haltestelle.",
+        "Setze dich auf einen freien Platz und beobachte 1 Minute.",
+        "Zähle die Anzahl der Leute im nächsten Waggon.",
+        "Finde ein Plakat und lies es dir laut vor.",
+        "Erzähle eine Geschichte, warum du heute den ÖV nutzt.",
+        "Summ ein Lied leise für 30 Sekunden.",
+        "Finde heraus, wie viele Türen der Zug hat.",
+        "Beobachte, wie viele Menschen aussteigen an der nächsten Station.",
+        "Frage jemanden, wie lange die Fahrt noch dauert.",
+        "Zähle, wie viele Sitzplätze frei sind.",
+        "Erzähle, was dir am ÖV am besten gefällt.",
+        "Geh zum Fahrer und wünsche ihm einen schönen Tag.",
+        "Zähle die Werbung im Zug oder Bus.",
+        "Finde das ungewöhnlichste Gepäckstück in deinem Waggon.",
+      ],
+      laeden: [
+      "Gehe zu einem Mitarbeiter und frage ihn, ob er dort arbeitet.",
+        "Frage einen Mitarbeiter wo sich der Laden befindet in dem er Arbeitet",
+        "Frage einen Mitarbeiter, ob du seine Arbeitskleidung anprobieren darfst.",
+        "Gehe zu einem Kunden und frage ihn dreimal, ob er hier arbeitet.",
+        "Gehe zu einem Mitarbeiter und frage ihn wie das Wetter draussen sei.",
+        "Gehe zur Kasse und frage den Kassierer ob er das Produkt das du kaufen möchtest für günstiger verkauft. Sollte er nein sagen flehst du ihn an als wäer er deine Mutter.",
+        "Frage einen Mitarbeiter welches Produkt du kaufen solltest.",
+        "Stöhne laut im Laden.",
+        "Sage zu einem Mitarbeiter das du so Reich bist das du den ganzen Laden kaufen könntest.",
+        "Mache 5-10 Liegestützen vor der Kasse.",
+        "Mache für 5 sek den Griddy vor dem Kassieren nachdem er dein Produkt gescannt hat.",
+        "Frage jemanden, welches Produkt du kaufen solltest.",
+        "Springe einmal quer durch den  Laden auf einem Bein",
+        "Frage einen Mitarbeiter nach deinen eigenen Handy Codes.",
+
+      ]
+    };
+
+    const jokerTexte = {
+      draussen: [
+        "Frage eine Person ob sie Behindert ist.",
+        "Frage ein Person ob sie diese Persohn sah (auf dem Handy ist ein Italian Brainrot charakter)",
+        "Du musst nichts machen Glück gehabt",
+        "Gehe zu einer Person begrüsse sie 5 mal gehe dann weg.",
+      ],
+      oev: [
+        "Joker: Du darfst eine ÖV-Runde aussetzen!",
+        "Joker: Du kannst die nächste ÖV-Frage tauschen.",
+        "Joker: Du darfst die nächste Frage überspringen.",
+        "Joker: Du bekommst einen Extra-Punkt.",
+        "Joker: Du darfst jemand anderen eine Frage stellen lassen.",
+        "Joker: Du kannst dir 30 Sekunden extra Zeit nehmen.",
+        "Joker: Du darfst die Frage deinem Nachbarn stellen.",
+        "Joker: Du darfst die Reihenfolge der Spieler ändern.",
+        "Joker: Du darfst eine Zusatzfrage beantworten.",
+      ],
+      laeden: [
+        "Spiele Laute Musik auf dein Handy während du Quer Durch den Laden läufst.",
+        "Tue so als würdest du Telefonieren Schreie dabei.",
+        "Frag einen Mitarbeiter ob er Griddy kann.",
+        "Spiele Spielchen mit der Kassiererin ziehe dein Produkt immer weiter gegen hinten des Bandes.",
+        "Beschwere dich Laut über die Preise.",
+        "Lege dich vor einer Person auf dem Boden.",
+        "verneine jede aussage der Kassierein",
+        "Kaufe nur ein Plastiksack im wert von 5 Rappen",
+        "Du musst nichts machen Glück gehabt",
+      ]
+    };
+
+    let kategorie = 'draussen'; // Startkategorie
+    let aktuellerTextIndex = 0;
+
+    let teilnehmer = JSON.parse(localStorage.getItem('jokerTeilnehmer')) || [];
+
+    teilnehmer = teilnehmer.map(spieler => {
+      if (spieler.joker === undefined) spieler.joker = 1;
+      return spieler;
+    });
+    localStorage.setItem('jokerTeilnehmer', JSON.stringify(teilnehmer));
+
+    let aktuellerSpielerIndex = 0;
+
+    const spielerNameDiv = document.getElementById('spielerName');
+    const spielerAuswahlSelect = document.getElementById('spielerAuswahl');
+    const kategorieAuswahl = document.getElementById('kategorieAuswahl');
+    const kategorieNameDiv = document.getElementById('kategorieName');
+    const textContainer = document.getElementById('textContainer');
+    const neuBtn = document.getElementById('neuBtn');
+    const jokerBtn = document.getElementById('jokerBtn');
+    const zurueckBtn = document.getElementById('zurueckBtn');
+
+    function init() {
+      if (teilnehmer.length === 0) {
+        spielerNameDiv.textContent = "Keine Teilnehmer vorhanden.";
+        spielerAuswahlSelect.style.display = 'none';
+        neuBtn.disabled = true;
+        jokerBtn.disabled = true;
+        return;
+      }
+
+      spielerAuswahlSelect.innerHTML = '';
+
+      teilnehmer.forEach((spieler, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = spieler.name;
+        spielerAuswahlSelect.appendChild(option);
+      });
+
+      spielerAuswahlSelect.value = aktuellerSpielerIndex;
+
+      kategorieAuswahl.value = kategorie;
+
+      updateSpielerAnzeige();
+      updateKategorieAnzeige();
+      zeigeNeueAufgabe();
+      updateJokerButton();
+
+      spielerAuswahlSelect.addEventListener('change', (e) => {
+        aktuellerSpielerIndex = parseInt(e.target.value, 10);
+        updateSpielerAnzeige();
+        updateJokerButton();
+      });
+
+      kategorieAuswahl.addEventListener('change', (e) => {
+        kategorie = e.target.value;
+        updateKategorieAnzeige();
+        zeigeNeueAufgabe();
+        textContainer.classList.remove('jokerText');
+      });
+
+      neuBtn.addEventListener('click', () => {
+        textContainer.classList.remove('jokerText');
+        zeigeNeueAufgabe();
+      });
+
+      jokerBtn.addEventListener('click', () => {
+        textContainer.classList.add('jokerText');
+        zeigeJokerText();
+        verbraucheJoker();
+        updateJokerButton();
+      });
+
+      zurueckBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    }
+
+    function updateSpielerAnzeige() {
+      spielerNameDiv.textContent = "Aktueller Spieler: " + teilnehmer[aktuellerSpielerIndex].name;
+      spielerAuswahlSelect.value = aktuellerSpielerIndex;
+    }
+
+    function updateKategorieAnzeige() {
+      let text = "";
+      if (kategorie === 'draussen') text = "Kategorie: Draussen";
+      else if (kategorie === 'oev') text = "Kategorie: ÖV";
+      else if (kategorie === 'laeden') text = "Kategorie: Läden";
+      kategorieNameDiv.textContent = text;
+      kategorieAuswahl.value = kategorie;
+    }
+
+    function zeigeNeueAufgabe() {
+      const arr = texte[kategorie];
+      if (!arr || arr.length === 0) {
+        textContainer.textContent = "Keine Aufgaben vorhanden.";
+        return;
+      }
+      aktuellerTextIndex = Math.floor(Math.random() * arr.length);
+      textContainer.textContent = arr[aktuellerTextIndex];
+    }
+
+    function zeigeJokerText() {
+      const arr = jokerTexte[kategorie];
+      if (!arr || arr.length === 0) {
+        textContainer.textContent = "Kein Jokertext vorhanden.";
+        return;
+      }
+      const jokerTextIndex = Math.floor(Math.random() * arr.length);
+      textContainer.textContent = arr[jokerTextIndex];
+    }
+
+    function updateJokerButton() {
+      if (teilnehmer[aktuellerSpielerIndex].joker > 0) {
+        jokerBtn.disabled = false;
+      } else {
+        jokerBtn.disabled = true;
+      }
+    }
+
+    function verbraucheJoker() {
+      if (teilnehmer[aktuellerSpielerIndex].joker > 0) {
+        teilnehmer[aktuellerSpielerIndex].joker--;
+        localStorage.setItem('jokerTeilnehmer', JSON.stringify(teilnehmer));
+      }
+    }
+
+    // Initialisierung starten
+    init();
+  </script>
+
+</body>
+</html>
